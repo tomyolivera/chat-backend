@@ -16,4 +16,6 @@ model user {
   last_connected DateTime? @db.Timestamp(0)
   avatar         String?   @db.VarChar(255)
   phone          String    @db.VarChar(18)
+  token          String?    @db.VarChar(255)
+  token_expiration_date DateTime? @db.Timestamp(0)
 }
