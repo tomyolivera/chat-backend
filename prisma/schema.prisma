@@ -13,6 +13,7 @@ model user {
   username       String    @unique(map: "username") @db.VarChar(50)
   password       String    @db.VarChar(255)
   status         String    @db.VarChar(11)
+  last_status    String?    @db.VarChar(11)
   last_connected DateTime? @db.Timestamp(0)
   avatar         String?   @db.VarChar(255)
   phone          String    @db.VarChar(18)

@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt'
-import prisma from '../Utils/database'
+import Model from './Model'
+import { object, string } from "yup"
 
 export type TStatus = "online" | "offline" | "away" | "invisible"
 
@@ -9,6 +10,7 @@ export interface IUser {
     username: string,
     password: string,
     status: TStatus,
+    last_status?: TStatus,
     last_connected?: Date,
     avatar?: string,
     phone: string,
@@ -16,7 +18,14 @@ export interface IUser {
     token_expiration_date: Date
 }
 
-export default class User {
+export default class User extends Model {
+    static schema: any = object().shape({
+        name: string().max(60).required(),
+        username: string().max(50).required(),
+        password: string().min(8).required(),
+        phone: string().max(50).required(),
+    })
+
     static async hashPassword(password: string): Promise<string>
     {
         return bcrypt.hash(password, 10)
