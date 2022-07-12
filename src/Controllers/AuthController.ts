@@ -1,14 +1,15 @@
 import { Request, Response, NextFunction } from 'express'
 
 import prisma from '../Utils/database'
-import User, { IUser } from '../Models/User'
+import User from '../Models/User'
 import Helper, { IDecodedType, IValidation } from '../Helpers'
+import { user } from '@prisma/client'
 
 class AuthController {
     static async register(req: Request, res: Response): Promise<Response>
     {
         try {
-            const user: IUser = req.body
+            const user: user = req.body
 
             const validation: IValidation = await User.validate(user, User.schema)
             if(!validation.isValid) return res.status(400).json(validation.errors)
@@ -29,7 +30,7 @@ class AuthController {
     static async login(req: Request, res: Response): Promise<Response>
     {
         try {
-            const { username, password }: IUser = req.body
+            const { username, password }: user = req.body
 
             // Validate if user exists
             const user = await prisma.user.findFirst({ where: { username } })

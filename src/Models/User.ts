@@ -4,20 +4,6 @@ import { object, string } from "yup"
 
 export type TStatus = "online" | "offline" | "away" | "invisible"
 
-export interface IUser {
-    id: number,
-    name: string,
-    username: string,
-    password: string,
-    status: TStatus,
-    last_status?: TStatus,
-    last_connected?: Date,
-    avatar?: string,
-    phone: string,
-    token: string,
-    token_expiration_date: Date
-}
-
 export default class User extends Model {
     static schema: any = object().shape({
         name: string().max(60).required(),

@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser'
 import UserRoutes from './Routes/user.routes'
 // import { auth, ConfigParams } from 'express-openid-connect'
 import AuthRoutes from './Routes/auth.routes'
+import ChatRoutes from './Routes/chat.routes'
 
 const app: Application = express()
 
@@ -34,5 +35,6 @@ app.use('/api/auth', AuthRoutes)
 //     res.send(req.oidc.isAuthenticated() ? 'Authenticated' : 'Not authenticated')
 // })
 app.use('/api/users', UserRoutes)
+app.use('/api/chat', ChatRoutes)
 
 export default app
